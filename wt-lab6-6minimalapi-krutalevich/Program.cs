@@ -18,7 +18,8 @@ app.MapGet("/api/info", () =>
         Application = "Web Technologies",
         Technology = "ASP.NET Core Minimal API",
         Variant = "Авиакомпания",
-        Version = "1.0"
+        Version = "1.1",
+        Updated = DateTime.UtcNow
     };
 });
 

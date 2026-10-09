@@ -1,4 +1,4 @@
-﻿@host = http://localhost:5253
+﻿@host = https://wt-lab6-6minimalapi-krutalevich.onrender.com
 
 ### Список рейсов (проверка, что сервер работает)
 GET {{host}}/api/flights
