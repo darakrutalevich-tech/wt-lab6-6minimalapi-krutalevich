@@ -1,6 +1,98 @@
-@wt_lab6_6minimalapi_krutalevich_HostAddress = http://localhost:5253
+﻿@host = http://localhost:5253
 
-GET {{wt_lab6_6minimalapi_krutalevich_HostAddress}}/weatherforecast/
-Accept: application/json
+### Список рейсов (проверка, что сервер работает)
+GET {{host}}/api/flights
 
-###
+### POST — создание рейса
+POST {{host}}/api/flights
+Content-Type: application/json
+
+{
+  "flightNumber": "AV-606",
+  "departure": "Минск",
+  "arrival": "Прага",
+  "price": 300,
+  "isAvailable": true
+}
+
+### Список после POST
+GET {{host}}/api/flights
+
+### PUT — обновить рейс 3
+PUT {{host}}/api/flights/3
+Content-Type: application/json
+
+{
+  "flightNumber": "AV-303-NEW",
+  "departure": "Гомель",
+  "arrival": "Санкт-Петербург",
+  "price": 250,
+  "isAvailable": true
+}
+
+### Проверка — GET того же рейса
+GET {{host}}/api/flights/3
+
+### PUT — несуществующий Id → 404
+PUT {{host}}/api/flights/999
+Content-Type: application/json
+
+{
+  "flightNumber": "XX-000",
+  "departure": "A",
+  "arrival": "B",
+  "price": 1,
+  "isAvailable": true
+}
+
+### DELETE — удалить рейс 2
+DELETE {{host}}/api/flights/2
+
+### Проверка — рейса больше нет → 404
+GET {{host}}/api/flights/2
+
+### DELETE — несуществующий → 404
+DELETE {{host}}/api/flights/999
+
+### Полный список после DELETE
+GET {{host}}/api/flights
+
+### 5 блок 3 уровень
+### 1. POST — создать
+POST {{host}}/api/flights
+Content-Type: application/json
+
+{
+  "flightNumber": "CRUD-1",
+  "departure": "Минск",
+  "arrival": "Токио",
+  "price": 999,
+  "isAvailable": true
+}
+
+### 2. GET — прочитать (замените id на тот, что вернул POST)
+GET {{host}}/api/flights/6
+
+### 3. PUT — обновить
+PUT {{host}}/api/flights/6
+Content-Type: application/json
+
+{
+  "flightNumber": "CRUD-1-UPDATED",
+  "departure": "Минск",
+  "arrival": "Осака",
+  "price": 1200,
+  "isAvailable": false
+}
+
+### 4. GET — проверить, что обновилось
+GET {{host}}/api/flights/6
+
+### 5. DELETE — удалить
+DELETE {{host}}/api/flights/6
+
+### 6. GET — рейса нет
+GET {{host}}/api/flights/6
+
+### 7. Полный список — рейса нет
+GET {{host}}/api/flights

@@ -1,3 +1,6 @@
+using wt_lab6_6minimalapi_krutalevich.Data;
+using wt_lab6_6minimalapi_krutalevich.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -19,10 +22,77 @@ app.MapGet("/api/info", () =>
     };
 });
 
+//// Блок 3, уровень 1: список всех рейсов
+//app.MapGet("/api/flights", () =>
+//{
+//    return Results.Ok(FlightStore.Flights);
+//});
+
+//Блок 3, уровень 2: рейс по Id
+app.MapGet("/api/flights/{id}", (int id) =>
+{
+    var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
+    if (flight == null)
+        return Results.NotFound();
+
+    return Results.Ok(flight);
+});
+
+// Блок 3, уровень 3: список рейсов + фильтрация (query-параметр)
+app.MapGet("/api/flights", (string? search) =>
+{
+    var flights = FlightStore.Flights.AsEnumerable();
+
+    if (!string.IsNullOrWhiteSpace(search))
+    {
+        flights = flights.Where(f =>
+            f.FlightNumber.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+            f.Departure.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+            f.Arrival.Contains(search, StringComparison.OrdinalIgnoreCase));
+    }
+
+    return Results.Ok(flights);
+});
+
+// Блок 4: POST /api/flights
+app.MapPost("/api/flights", (Flight flight) =>
+{
+    flight.Id = FlightStore.NextId();
+    FlightStore.Flights.Add(flight);
+    return Results.Created($"/api/flights/{flight.Id}", flight);
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+// Блок 5, уровень 1: PUT /api/flights/{id}
+app.MapPut("/api/flights/{id}", (int id, Flight updated) =>
+{
+    var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
+    if (flight == null)
+        return Results.NotFound();
+
+    flight.FlightNumber = updated.FlightNumber;
+    flight.Departure = updated.Departure;
+    flight.Arrival = updated.Arrival;
+    flight.Price = updated.Price;
+    flight.IsAvailable = updated.IsAvailable;
+
+    return Results.Ok(flight);
+});
+
+// Блок 5, уровень 2: DELETE /api/flights/{id}
+app.MapDelete("/api/flights/{id}", (int id) =>
+{
+    var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
+    if (flight == null)
+        return Results.NotFound();
+
+    FlightStore.Flights.Remove(flight);
+    return Results.NoContent();
+});
 
 //var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
 //app.Run($"http://0.0.0.0:{port}");
