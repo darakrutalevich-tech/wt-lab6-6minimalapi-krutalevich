@@ -6,7 +6,7 @@
 
 Репозиторий: https://github.com/darakrutalevich-tech/wt-lab6-6minimalapi-krutalevich
 
-Render: 
+Render: https://wt-lab6-6minimalapi-krutalevich.onrender.com
 
 
 
@@ -68,7 +68,6 @@ Render:
 
 ```json
 
-\[
 
  {
 
@@ -86,7 +85,6 @@ Render:
 
  }
 
-]
 
 ```
 
