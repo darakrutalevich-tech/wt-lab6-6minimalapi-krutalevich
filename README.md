@@ -70,21 +70,21 @@ Render:
 
 \[
 
-&#x20; {
+ {
 
-&#x20;   "id": 1,
+   "id": 1,
 
-&#x20;   "flightNumber": "AV-101",
+   "flightNumber": "AV-101",
 
-&#x20;   "departure": "Минск",
+   "departure": "Минск",
 
-&#x20;   "arrival": "Варшава",
+   "arrival": "Варшава",
 
-&#x20;   "price": 250,
+   "price": 250,
 
-&#x20;   "isAvailable": true
+   "isAvailable": true
 
-&#x20; }
+ }
 
 ]
 
@@ -100,7 +100,7 @@ Render:
 
 
 
-&#x20;   GET /api/flights/1
+   GET /api/flights/1
 
 
 
@@ -112,17 +112,17 @@ Render:
 
 {
 
-&#x20; "id": 1,
+ "id": 1,
 
-&#x20; "flightNumber": "AV-101",
+ "flightNumber": "AV-101",
 
-&#x20; "departure": "Минск",
+ "departure": "Минск",
 
-&#x20; "arrival": "Варшава",
+ "arrival": "Варшава",
 
-&#x20; "price": 250,
+ "price": 250,
 
-&#x20; "isAvailable": true
+ "isAvailable": true
 
 }
 
@@ -146,15 +146,15 @@ Render:
 
 {
 
-&#x20; "flightNumber": "AV-606",
+ "flightNumber": "AV-606",
 
-&#x20; "departure": "Минск",
+ "departure": "Минск",
 
-&#x20; "arrival": "Прага",
+ "arrival": "Прага",
 
-&#x20; "price": 300,
+ "price": 300,
 
-&#x20; "isAvailable": true
+ "isAvailable": true
 
 }
 
@@ -170,17 +170,17 @@ Render:
 
 {
 
-&#x20; "id": 6,
+ "id": 6,
 
-&#x20; "flightNumber": "AV-606",
+ "flightNumber": "AV-606",
 
-&#x20; "departure": "Минск",
+ "departure": "Минск",
 
-&#x20; "arrival": "Прага",
+ "arrival": "Прага",
 
-&#x20; "price": 300,
+ "price": 300,
 
-&#x20; "isAvailable": true
+ "isAvailable": true
 
 }
 
@@ -212,15 +212,15 @@ Render:
 
 {
 
-&#x20; "flightNumber": "AV-101-NEW",
+ "flightNumber": "AV-101-NEW",
 
-&#x20; "departure": "Минск",
+ "departure": "Минск",
 
-&#x20; "arrival": "Краков",
+ "arrival": "Краков",
 
-&#x20; "price": 280,
+ "price": 280,
 
-&#x20; "isAvailable": true
+ "isAvailable": true
 
 }
 
@@ -240,7 +240,7 @@ Render:
 
 
 
-&#x20;   DELETE /api/flights/2
+   DELETE /api/flights/2
 
 
 
