@@ -7,28 +7,28 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Áëîê 1, óðîâåíü 2: ïðîâåðêà çàïóñêà
-app.MapGet("/", () => "Minimal API ðàáîòàåò!");
+// Ð‘Ð»Ð¾Ðº 1, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 2: Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð·Ð°Ð¿ÑƒÑÐºÐ°
+app.MapGet("/", () => "Minimal API Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚!");
 
-// Áëîê 1, óðîâåíü 3: èíôîðìàöèÿ î ïðèëîæåíèè
+// Ð‘Ð»Ð¾Ðº 1, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 3: Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸
 app.MapGet("/api/info", () =>
 {
     return new
     {
         Application = "Web Technologies",
         Technology = "ASP.NET Core Minimal API",
-        Variant = "Àâèàêîìïàíèÿ",
+        Variant = "ÐÐ²Ð¸Ð°ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ñ",
         Version = "1.0"
     };
 });
 
-//// Áëîê 3, óðîâåíü 1: ñïèñîê âñåõ ðåéñîâ
+//// Ð‘Ð»Ð¾Ðº 3, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 1: ÑÐ¿Ð¸ÑÐ¾Ðº Ð²ÑÐµÑ… Ñ€ÐµÐ¹ÑÐ¾Ð²
 //app.MapGet("/api/flights", () =>
 //{
 //    return Results.Ok(FlightStore.Flights);
 //});
 
-//Áëîê 3, óðîâåíü 2: ðåéñ ïî Id
+//Ð‘Ð»Ð¾Ðº 3, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 2: Ñ€ÐµÐ¹Ñ Ð¿Ð¾ Id
 app.MapGet("/api/flights/{id}", (int id) =>
 {
     var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
@@ -38,7 +38,7 @@ app.MapGet("/api/flights/{id}", (int id) =>
     return Results.Ok(flight);
 });
 
-// Áëîê 3, óðîâåíü 3: ñïèñîê ðåéñîâ + ôèëüòðàöèÿ (query-ïàðàìåòð)
+// Ð‘Ð»Ð¾Ðº 3, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 3: ÑÐ¿Ð¸ÑÐ¾Ðº Ñ€ÐµÐ¹ÑÐ¾Ð² + Ñ„Ð¸Ð»ÑŒÑ‚Ñ€Ð°Ñ†Ð¸Ñ (query-Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€)
 app.MapGet("/api/flights", (string? search) =>
 {
     var flights = FlightStore.Flights.AsEnumerable();
@@ -54,10 +54,10 @@ app.MapGet("/api/flights", (string? search) =>
     return Results.Ok(flights);
 });
 
-// Áëîê 4: POST /api/flights
+// Ð‘Ð»Ð¾Ðº 4: POST /api/flights
 app.MapPost("/api/flights", (Flight flight) =>
 {
-    // Ïðîñòàÿ âàëèäàöèÿ âðó÷íóþ ( äëÿ áëîêà 6)
+    // ÐŸÑ€Ð¾ÑÑ‚Ð°Ñ Ð²Ð°Ð»Ð¸Ð´Ð°Ñ†Ð¸Ñ Ð²Ñ€ÑƒÑ‡Ð½ÑƒÑŽ ( Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ° 6)
     if (string.IsNullOrWhiteSpace(flight.FlightNumber) ||
         string.IsNullOrWhiteSpace(flight.Departure) ||
         string.IsNullOrWhiteSpace(flight.Arrival) ||
@@ -65,7 +65,7 @@ app.MapPost("/api/flights", (Flight flight) =>
     {
         return Results.BadRequest(new
         {
-            error = "Íåêîððåêòíûå äàííûå: íîìåð ðåéñà, ãîðîäà è öåíà îáÿçàòåëüíû; öåíà > 0."
+            error = "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ: Ð½Ð¾Ð¼ÐµÑ€ Ñ€ÐµÐ¹ÑÐ°, Ð³Ð¾Ñ€Ð¾Ð´Ð° Ð¸ Ñ†ÐµÐ½Ð° Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹; Ñ†ÐµÐ½Ð° > 0."
         });
     }
 
@@ -79,14 +79,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-// Áëîê 5, óðîâåíü 1: PUT /api/flights/{id}
+// Ð‘Ð»Ð¾Ðº 5, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 1: PUT /api/flights/{id}
 app.MapPut("/api/flights/{id}", (int id, Flight updated) =>
 {
     var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
     if (flight == null)
         return Results.NotFound();
 
-    // äëÿ áëîêà 6
+    // Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ° 6
     if (string.IsNullOrWhiteSpace(updated.FlightNumber) ||
         string.IsNullOrWhiteSpace(updated.Departure) ||
         string.IsNullOrWhiteSpace(updated.Arrival) ||
@@ -94,7 +94,7 @@ app.MapPut("/api/flights/{id}", (int id, Flight updated) =>
     {
         return Results.BadRequest(new
         {
-            error = "Íåêîððåêòíûå äàííûå: íîìåð ðåéñà, ãîðîäà è öåíà îáÿçàòåëüíû; öåíà > 0."
+            error = "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ: Ð½Ð¾Ð¼ÐµÑ€ Ñ€ÐµÐ¹ÑÐ°, Ð³Ð¾Ñ€Ð¾Ð´Ð° Ð¸ Ñ†ÐµÐ½Ð° Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹; Ñ†ÐµÐ½Ð° > 0."
         });
     }
 
@@ -107,7 +107,7 @@ app.MapPut("/api/flights/{id}", (int id, Flight updated) =>
     return Results.Ok(flight);
 });
 
-// Áëîê 5, óðîâåíü 2: DELETE /api/flights/{id}
+// Ð‘Ð»Ð¾Ðº 5, ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ 2: DELETE /api/flights/{id}
 app.MapDelete("/api/flights/{id}", (int id) =>
 {
     var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
