@@ -96,3 +96,41 @@ GET {{host}}/api/flights/6
 
 ### 7. Полный список — рейса нет
 GET {{host}}/api/flights
+
+
+### для блока 6
+### 400 — POST с пустым номером рейса
+POST {{host}}/api/flights
+Content-Type: application/json
+
+{
+  "flightNumber": "",
+  "departure": "Минск",
+  "arrival": "Прага",
+  "price": 300,
+  "isAvailable": true
+}
+
+### 400 — POST с отрицательной ценой
+POST {{host}}/api/flights
+Content-Type: application/json
+
+{
+  "flightNumber": "AV-000",
+  "departure": "Минск",
+  "arrival": "Прага",
+  "price": -100,
+  "isAvailable": true
+}
+
+### 400 — PUT с пустыми полями
+PUT {{host}}/api/flights/1
+Content-Type: application/json
+
+{
+  "flightNumber": "",
+  "departure": "",
+  "arrival": "",
+  "price": 0,
+  "isAvailable": false
+}

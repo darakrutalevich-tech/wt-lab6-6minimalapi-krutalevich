@@ -57,6 +57,18 @@ app.MapGet("/api/flights", (string? search) =>
 // Блок 4: POST /api/flights
 app.MapPost("/api/flights", (Flight flight) =>
 {
+    // Простая валидация вручную ( для блока 6)
+    if (string.IsNullOrWhiteSpace(flight.FlightNumber) ||
+        string.IsNullOrWhiteSpace(flight.Departure) ||
+        string.IsNullOrWhiteSpace(flight.Arrival) ||
+        flight.Price <= 0)
+    {
+        return Results.BadRequest(new
+        {
+            error = "Некорректные данные: номер рейса, города и цена обязательны; цена > 0."
+        });
+    }
+
     flight.Id = FlightStore.NextId();
     FlightStore.Flights.Add(flight);
     return Results.Created($"/api/flights/{flight.Id}", flight);
@@ -73,6 +85,18 @@ app.MapPut("/api/flights/{id}", (int id, Flight updated) =>
     var flight = FlightStore.Flights.FirstOrDefault(f => f.Id == id);
     if (flight == null)
         return Results.NotFound();
+
+    // для блока 6
+    if (string.IsNullOrWhiteSpace(updated.FlightNumber) ||
+        string.IsNullOrWhiteSpace(updated.Departure) ||
+        string.IsNullOrWhiteSpace(updated.Arrival) ||
+        updated.Price <= 0)
+    {
+        return Results.BadRequest(new
+        {
+            error = "Некорректные данные: номер рейса, города и цена обязательны; цена > 0."
+        });
+    }
 
     flight.FlightNumber = updated.FlightNumber;
     flight.Departure = updated.Departure;
